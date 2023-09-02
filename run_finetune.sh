@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:a100:1 
 #SBATCH --time=8:00:00
 #SBATCH --mem=40GB
-#SBATCH --mail-user=<your email>
+#SBATCH --mail-user=u1217882@umail.utah.edu
 #SBATCH --mail-type=FAIL,END
 #SBATCH -o assignment_1-%j
 #SBATCH --export=ALL
@@ -20,4 +20,4 @@ export HF_DATASETS_CACHE="/scratch/general/vast/u1217882/huggingface_cache"
 
 OUT_DIR=/scratch/general/vast/u1217882/cs6966/assignment1/models
 mkdir -p ${OUT_DIR}
-python <filename>.py --output_dir ${OUT_DIR}
+python training_file.py --output_dir ${OUT_DIR}
