@@ -60,7 +60,7 @@ tokenizer = DebertaV2Tokenizer.from_pretrained('microsoft/deberta-v3-base')
 
 # Tokenization
 def tokenize_batch(batch):
-    return tokenizer(batch['text'], padding=True, truncation=True, max_length=1028)
+    return tokenizer(batch['text'], padding=True, truncation=True, max_length=512)
 
 # Load IMDB dataset
 dataset = load_dataset('imdb')
@@ -71,7 +71,7 @@ train_dataset = dataset['train'].train_test_split(test_size=0.1)  # 10% for vali
 train_data = train_dataset['train'].map(tokenize_batch, batched=True)
 validation_data = dataset['test'].map(tokenize_batch, batched=True)
 """
-# Leave the test set for the end
+
 train_data = dataset['train'].map(tokenize_batch, batched=True)
 test_data = dataset['test'].map(tokenize_batch, batched=True)
 
@@ -85,10 +85,9 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=args.batch_size,
     num_train_epochs=args.epochs,
     weight_decay=args.weight_decay,
-    gradient_accumulation_steps=64,  # Number of updates steps to accumulate before performing a backward/update pass
+    gradient_accumulation_steps=8,  # Number of updates steps to accumulate before performing a backward/update pass
     load_best_model_at_end=True,
     metric_for_best_model=args.metric_for_best_model,
-    logging_dir='./logs'
 )
 
 # Function to compute metrics
@@ -109,7 +108,7 @@ trainer = Trainer(
 trainer.train()
 trainer.evaluate()
 
-# Predictions on validation data
+# Predictions on test data
 predictions = trainer.predict(test_data)
 predicted_labels = predictions.predictions.argmax(-1)
 
@@ -122,8 +121,9 @@ incorrect_indices = [i for i, (true, pred) in enumerate(zip(actual_labels, predi
 # Randomly select 10 incorrect instances
 selected_indices = random.sample(incorrect_indices, min(10, len(incorrect_indices)))
 
-# Save these instances into a jsonlines file
-output_items = [{"review": test_data["text"][i], "label": actual_labels[i], "predicted": predicted_labels[i]} for i in selected_indices]
+# Detokenize and save these instances into a jsonlines file
+output_items = [{"review": tokenizer.decode(test_data["input_ids"][i]), "label": int(actual_labels[i]), "predicted": int(predicted_labels[i])} for i in selected_indices]
+
     
 with jsonlines.open('incorrect_instances.jsonl', mode='w') as writer:
     for item in output_items:
