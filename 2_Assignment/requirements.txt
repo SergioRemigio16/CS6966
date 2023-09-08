@@ -1,0 +1,8 @@
+datasets
+transformers
+scikit-learn
+sentencepiece
+torch
+protobuf
+accelerate
+jsonlines
