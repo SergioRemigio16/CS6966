@@ -6,3 +6,4 @@ torch
 protobuf
 accelerate
 jsonlines
+pillow
