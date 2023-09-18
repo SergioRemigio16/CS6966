@@ -3,6 +3,7 @@ import torch
 from PIL import Image
 from transformers import IdeficsForVisionText2Text, AutoProcessor
 from datasets import load_dataset
+import jsonlines
 import random
 
 # Set the random seed for same model output
@@ -32,40 +33,34 @@ current_directory = os.getcwd()
 # We feed to the model an arbitrary sequence of text strings and images. Images can be either URLs or PIL Images.
 prompts = [
     [
-        "User: What is in this image?",
-        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-        "<end_of_utterance>",
-
-        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
-
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[0]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[1]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         test_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         test_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
@@ -73,40 +68,34 @@ prompts = [
         "\nAssistant: "
     ],
     [
-        "User: What is in this image?",
-        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-        "<end_of_utterance>",
-
-        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
-
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[0]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[1]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         test_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         test_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
@@ -114,40 +103,34 @@ prompts = [
         "\nAssistant: "
     ],
     [
-        "User: What is in this image?",
-        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-        "<end_of_utterance>",
-
-        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
-
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[0]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[1]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         test_samples[2]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         test_samples[2]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
@@ -155,40 +138,34 @@ prompts = [
         "\nAssistant: "
     ],
     [
-        "User: What is in this image?",
-        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-        "<end_of_utterance>",
-
-        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
-
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[0]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[1]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         test_samples[3]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         test_samples[3]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
@@ -196,40 +173,34 @@ prompts = [
         "\nAssistant: "
     ],
     [
-        "User: What is in this image?",
-        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-        "<end_of_utterance>",
-
-        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
-
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[0]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[0]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[0]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         train_samples[1]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         train_samples[1]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
         "<end_of_utterance>",
-        "\nAssistant: ",
+        "\nAssistant:  ",
         train_samples[1]['label'],
         "<end_of_utterance>",
 
-        "\nUser: Look at this image.",
+        "\nUser: Look at this funny New Yorker cartoon.",
         test_samples[4]['image'],
         "<end_of_utterance>",
-        "\nUser: Now read this caption about the image.",
+        "\nUser: Now read this caption about the cartoon. ",
         test_samples[4]['caption_choices'],
         "<end_of_utterance>",
         "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
@@ -239,18 +210,20 @@ prompts = [
 
 ]
 
-"""
 # --batched mode
 inputs = processor(prompts, add_end_of_utterance_token=False, return_tensors="pt").to(device)
-"""
 # --single sample mode
-inputs = processor(prompts[0], return_tensors="pt").to(device)
+# inputs = processor(prompts[0], return_tensors="pt").to(device)
 
 # Generation args
 exit_condition = processor.tokenizer("<end_of_utterance>", add_special_tokens=False).input_ids
 bad_words_ids = processor.tokenizer(["<image>", "<fake_token_around_image>"], add_special_tokens=False).input_ids
 
-generated_ids = model.generate(**inputs, eos_token_id=exit_condition, bad_words_ids=bad_words_ids, max_length=100)
+generated_ids = model.generate(**inputs, eos_token_id=exit_condition, bad_words_ids=bad_words_ids, max_length=750)
 generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)
 for i, t in enumerate(generated_text):
     print(f"{i}:\n{t}\n")
+
+with jsonlines.open('generated_text.jsonl', mode='w') as writer:
+    for i, t in enumerate(generated_text):
+        writer.write({"index": i, "text": t})
