@@ -7,3 +7,4 @@ protobuf
 accelerate
 jsonlines
 pillow
+openai
