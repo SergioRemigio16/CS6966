@@ -3,16 +3,24 @@ import torch
 from PIL import Image
 from transformers import IdeficsForVisionText2Text, AutoProcessor
 from datasets import load_dataset
+import random
+
+# Set the random seed for same model output
+torch.cuda.manual_seed_all(1217882)
+# Set the random seed for the examples extracted
+random.seed(1217882)
+
+device = "cuda"
 
 # Get the training dataset
-dataset = load_dataset("jmhessel/newyorker_caption_contest", split="train")
+dataset = load_dataset("jmhessel/newyorker_caption_contest", "explanation_from_pixels")
+train_data = dataset['train']
 
-# Set the random seed for reproducibility
-torch.manual_seed(1217882)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed_all(1217882)
+# Randomly sample 5 training examples from the train_data
+train_samples = random.sample(list(train_data), 2)
+# Randomly sample 2 test examples from the train_data
+test_samples = random.sample(list(train_data), 5)
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
 
 checkpoint = "HuggingFaceM4/idefics-9b-instruct"
 model = IdeficsForVisionText2Text.from_pretrained(checkpoint, torch_dtype=torch.bfloat16).to(device)
@@ -25,23 +33,218 @@ current_directory = os.getcwd()
 prompts = [
     [
         "User: What is in this image?",
-        image_astronaut,
+        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
         "<end_of_utterance>",
 
         "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
 
-        "\nUser:",
-        "https://static.wikia.nocookie.net/asterix/images/2/25/R22b.gif/revision/latest?cb=20110815073052",
-        "And who is that?<end_of_utterance>",
+        "\nUser: Look at this image.",
+        train_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[0]['label'],
+        "<end_of_utterance>",
 
-        "\nAssistant:",
+        "\nUser: Look at this image.",
+        train_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[1]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        test_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        test_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: "
     ],
+    [
+        "User: What is in this image?",
+        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
+        "<end_of_utterance>",
+
+        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[0]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[1]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        test_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        test_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: "
+    ],
+    [
+        "User: What is in this image?",
+        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
+        "<end_of_utterance>",
+
+        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[0]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[1]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        test_samples[2]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        test_samples[2]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: "
+    ],
+    [
+        "User: What is in this image?",
+        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
+        "<end_of_utterance>",
+
+        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[0]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[1]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        test_samples[3]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        test_samples[3]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: "
+    ],
+    [
+        "User: What is in this image?",
+        "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
+        "<end_of_utterance>",
+
+        "\nAssistant: This picture depicts Idefix, the dog of Obelix in Asterix and Obelix. Idefix is running on the ground.<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[0]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[0]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[0]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        train_samples[1]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        train_samples[1]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: ",
+        train_samples[1]['label'],
+        "<end_of_utterance>",
+
+        "\nUser: Look at this image.",
+        test_samples[4]['image'],
+        "<end_of_utterance>",
+        "\nUser: Now read this caption about the image.",
+        test_samples[4]['caption_choices'],
+        "<end_of_utterance>",
+        "\nUser: I don't understand why this caption is funny. Can you help me understand the joke?",
+        "<end_of_utterance>",
+        "\nAssistant: "
+    ],
+
 ]
 
+"""
 # --batched mode
 inputs = processor(prompts, add_end_of_utterance_token=False, return_tensors="pt").to(device)
+"""
 # --single sample mode
-# inputs = processor(prompts[0], return_tensors="pt").to(device)
+inputs = processor(prompts[0], return_tensors="pt").to(device)
 
 # Generation args
 exit_condition = processor.tokenizer("<end_of_utterance>", add_special_tokens=False).input_ids
