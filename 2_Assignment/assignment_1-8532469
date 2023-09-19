@@ -1,0 +1,83 @@
+Loading model
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:19<00:19, 19.93s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:34<00:00, 16.50s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:34<00:00, 17.02s/it]
+/uufs/chpc.utah.edu/common/home/u1217882/miniconda3/envs/environment/lib/python3.8/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Loading data
+0:
+
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Don't blame me—I voted for the other thing. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A play on the term "Don't blame me—I voted for the other guy." which is what people say if the political party in power does something unsavory, but they voted for someone different during the election. Here, the "thing" is a monster terrorizing the city, and the person yelling apparently voted for a different monster during an election. It's funny to think about an election between two monsters, and why the person feels the monster they voted for wouldn't have terrorized the city. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Gee, you guys really are having trouble meeting your recruitment quota! 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A joke about the difficulty of recruiting of executioners. Being a member of a firing squad is likely not a popular job, and so instead of getting qualified people, this prison appears to be handing a gun to anyone willing, even a dog. The person about to be executed nonchalantly quips that they can't find qualified people. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.He's done. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant: The caption is a play on words, as "he's done" can be interpreted as the man being dead, and the phrase "done" can also mean "ready" or "finished." In this case, it's a humorous twist on the idea of a man being buried alive in a coffin, with the phrase "he's done" referring to his death.
+
+1:
+
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Don't blame me—I voted for the other thing. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A play on the term "Don't blame me—I voted for the other guy." which is what people say if the political party in power does something unsavory, but they voted for someone different during the election. Here, the "thing" is a monster terrorizing the city, and the person yelling apparently voted for a different monster during an election. It's funny to think about an election between two monsters, and why the person feels the monster they voted for wouldn't have terrorized the city. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Gee, you guys really are having trouble meeting your recruitment quota! 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A joke about the difficulty of recruiting of executioners. Being a member of a firing squad is likely not a popular job, and so instead of getting qualified people, this prison appears to be handing a gun to anyone willing, even a dog. The person about to be executed nonchalantly quips that they can't find qualified people. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Cancel my twelve-oh-one. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant: A play on the term "cancel my appointment," this caption is a humorous twist on the idea of canceling a meeting. In this case, the man is not canceling a meeting, but rather, he is requesting to be "cancelled" himself. It's a funny way of saying that he wants to be fired from his job.
+
+2:
+
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Don't blame me—I voted for the other thing. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A play on the term "Don't blame me—I voted for the other guy." which is what people say if the political party in power does something unsavory, but they voted for someone different during the election. Here, the "thing" is a monster terrorizing the city, and the person yelling apparently voted for a different monster during an election. It's funny to think about an election between two monsters, and why the person feels the monster they voted for wouldn't have terrorized the city. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Gee, you guys really are having trouble meeting your recruitment quota! 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A joke about the difficulty of recruiting of executioners. Being a member of a firing squad is likely not a popular job, and so instead of getting qualified people, this prison appears to be handing a gun to anyone willing, even a dog. The person about to be executed nonchalantly quips that they can't find qualified people. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.This can only end in a draw. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant: A play on the phrase "This can only end in tears," which means something is bound to end badly. In this case, the cowboy and the horse are dressed as knights, and the cowboy is holding a sword. The horse is also holding a sword, and they are facing each other. The caption suggests that the outcome of their fight will be inconclusive, much like a draw in a chess game.
+
+3:
+
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Don't blame me—I voted for the other thing. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A play on the term "Don't blame me—I voted for the other guy." which is what people say if the political party in power does something unsavory, but they voted for someone different during the election. Here, the "thing" is a monster terrorizing the city, and the person yelling apparently voted for a different monster during an election. It's funny to think about an election between two monsters, and why the person feels the monster they voted for wouldn't have terrorized the city. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Gee, you guys really are having trouble meeting your recruitment quota! 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A joke about the difficulty of recruiting of executioners. Being a member of a firing squad is likely not a popular job, and so instead of getting qualified people, this prison appears to be handing a gun to anyone willing, even a dog. The person about to be executed nonchalantly quips that they can't find qualified people. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.It's for my back. You have two more questions. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant: The caption is a play on the phrase "It's for my eyes," which is often used when someone is trying to explain something to another person. In this case, the man is saying that the woman is carrying the rock for his back, and he has two more questions. The joke lies in the absurdity of the situation, with the man expecting the woman to carry the rock on her back for his back.
+
+4:
+
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Don't blame me—I voted for the other thing. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A play on the term "Don't blame me—I voted for the other guy." which is what people say if the political party in power does something unsavory, but they voted for someone different during the election. Here, the "thing" is a monster terrorizing the city, and the person yelling apparently voted for a different monster during an election. It's funny to think about an election between two monsters, and why the person feels the monster they voted for wouldn't have terrorized the city. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Gee, you guys really are having trouble meeting your recruitment quota! 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant:A joke about the difficulty of recruiting of executioners. Being a member of a firing squad is likely not a popular job, and so instead of getting qualified people, this prison appears to be handing a gun to anyone willing, even a dog. The person about to be executed nonchalantly quips that they can't find qualified people. 
+User: Look at this funny New Yorker cartoon. 
+User: Now read this caption about the cartoon.Bullets don't grow on trees, Harry. 
+User: I don't understand why this caption is funny. Can you help me understand the joke? 
+Assistant: A play on the phrase "Sticks and stones may break my bones, but words will never hurt me." This cartoon is a humorous take on the idea that words can be hurtful, as the man is pointing a gun at his friend, and the friend is trying to explain that words can be hurtful too. The phrase "Bullets don't grow on trees, Harry" is a reference to the fact that bullets are expensive and not easily accessible, so the man is saying that he can't just give the friend bullets to solve the problem.
+
+Loading data
+Loading model
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:33<00:33, 33.99s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:45<00:00, 20.53s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:45<00:00, 22.55s/it]

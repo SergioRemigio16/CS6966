@@ -20,4 +20,4 @@ export HF_DATASETS_CACHE="/scratch/general/vast/u1217882/huggingface_cache"
 
 OUT_DIR=/scratch/general/vast/u1217882/cs6966/assignment1/models
 mkdir -p ${OUT_DIR}
-python training_file.py 
+python training_file.py --output_dir ${OUT_DIR} --seed 1217882 
